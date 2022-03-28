@@ -69,3 +69,25 @@ def punctuation_stop(text):
             filtered.append(w.lower())
 
     return filtered
+
+
+# web page 
+bp_transcipts = 'https://www.biggerpockests.com/podcast-transcripts'
+
+# gets word soup from website :
+soupout = get_soup(bp_transcipts)
+
+# gets links from website
+h_links = get_links(soupout)
+
+# trims links from website 
+html_links = h_links[5:163]
+
+# return list of all episode text:
+text_return_list = get_episode_text(html_links)
+all_text = get_text(text_return_list)
+
+# removed punctuation and stop words 
+filteredlst = punctuation_stop(all_text)
+
+# list of unwanted words
