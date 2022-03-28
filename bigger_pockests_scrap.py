@@ -72,7 +72,7 @@ def punctuation_stop(text):
 
 
 # web page 
-bp_transcipts = 'https://www.biggerpockests.com/podcast-transcripts'
+bp_transcipts = 'https://www.biggerpockets.com/podcast-transcripts'
 
 # gets word soup from website :
 soupout = get_soup(bp_transcipts)
@@ -92,3 +92,22 @@ filteredlst = punctuation_stop(all_text)
 
 # list of unwanted words
 unwanted = ['brandon', 'josh', 'one', 'guy', 'really', 'little bit', 'thing','say','go','actually', 'even','probably','going','said','something','okay','maybe','got','well','way']
+
+# Remove unwanted words :
+text = " ".join([ele for ele in filteredlst if ele not in unwanted])
+
+# get the working directory :
+d = getcwd()
+
+# nmpy image file of mask image :
+mask_logo = np.array(Image.open(path.join(d,"Bigger_Pockets_Logo4.png")))
+
+# Create the word cloud object :
+wc = WordCloud(background_color='wite', max_words = 2000, max_font_size = 90, random_state=1, mask = mask_logo, stopwords = STOPWORDS)
+wc.generate(text)
+image_colors = ImageColorGenerator(mask_logo)
+
+plt.figure(figsize=[10,10])
+plt.imshow(wc.recolor(color_func = image_colors))
+plt.axis('off')
+plt.show()
