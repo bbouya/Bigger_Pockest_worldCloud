@@ -3,6 +3,7 @@ Created ub 28/03/2022
 """
 
 
+import re
 from bs4 import BeautifulSoup
 from bs4.dammit import EncodingDetector
 
@@ -55,3 +56,16 @@ def get_episode_text(episode_list):
         soup= get_soup(i)
         text_array = get_ps(soup)
         full_text = get_text(text_array)
+        text_return.append(full_text)
+    return text_return
+
+def punctuation_stop(text):
+    """remove punctuation and stop words"""
+    filtered = []
+    stop_words = set(stopwords.words('english'))
+    word_takens = word_tokenize(text)
+    for w in word_takens:
+        if w not in stop_words and w.isalpha():
+            filtered.append(w.lower())
+
+    return filtered
