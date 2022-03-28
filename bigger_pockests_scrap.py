@@ -91,3 +91,4 @@ all_text = get_text(text_return_list)
 filteredlst = punctuation_stop(all_text)
 
 # list of unwanted words
+unwanted = ['brandon', 'josh', 'one', 'guy', 'really', 'little bit', 'thing','say','go','actually', 'even','probably','going','said','something','okay','maybe','got','well','way']
